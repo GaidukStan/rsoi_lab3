@@ -1,0 +1,47 @@
+{% extends "page.html" %}
+
+{% macro here() -%}
+  /entry
+{%- endmacro %}
+
+{% block title %}Entry - {{ super() }}{% endblock %}
+
+{% block body %}
+  <h1>Register for race</h1>
+  <form method="POST">
+    <table>
+      <tbody>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Distance</th>
+		<th>Laps</th>
+        <tr>
+          <td style="text-align:center;border:1px solid">{{ races[0]['name'] }}</td>
+          <td style="text-align:center;border:1px solid">{{ races[0]['country'] }}</td>
+          <td style="text-align:center;border:1px solid">{{ races[0]['distance'] }}</td>
+		  <td style="text-align:center;border:1px solid">{{ races[0]['laps'] }}</td>
+        </tr>  
+      </tbody>
+    </table>
+    <br>
+    <table>
+      <tbody>
+        <tr>
+          <td style="text-align:left"> What class are you ready to join?</td>
+        </tr>
+        <tr>
+          <td>  
+            <input name="rclass"></input>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align:center">
+            <br>
+            <input type="hidden" name="race_id" value="{{races[0]['id']}}"></input>
+            <input type="submit" value="Choose race to participate!"></input>            
+          </td>
+        </tr>
+      </tbody>
+    </table>  
+  </form>
+{% endblock  %}

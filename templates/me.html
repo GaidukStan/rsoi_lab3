@@ -1,0 +1,45 @@
+{% extends "page.html" %}
+
+{% block title %}Personal information - {{ super() }}{% endblock %}
+
+{% block body %}
+  <h1>Personal Information</h1>
+  <form method="POST">
+    {% if user is not none %}
+      <table>
+        <tbody>
+          <tr>
+            <td style="text-align:right" readonly>Username:</td>
+            <td>
+              <input name="login" value="{{ user['login'] }}" disabled="disabled"></input>
+            </td>
+          </tr>  
+          <tr>
+            <td style="text-align:right">Name:</td>
+            <td>
+              <input name="name" {% if user['name'] is not none %}value="{{ user['name'] }}"{% endif %}  disabled="disabled"></input>
+            </td>
+          </tr>  
+          <tr>
+            <td style="text-align:right">Country:</td>
+            <td>
+              <input name="country" {% if user['country'] is not none %}value="{{ user['country'] }}"{% endif %}  disabled="disabled"></input>
+            </td>
+          </tr> 
+          <tr>
+            <td style="text-align:right">eMail:</td>
+            <td>
+              <input name="email" type="email" {% if user['email'] is not none %}value="{{ user['email'] }}"{% endif %}  disabled="disabled"></input>
+            </td>
+          </tr>  
+        </tbody>
+      </table>
+      <br>
+      <a href="/entrylist/"> Check races you participate</a>
+      <br>
+      <a href="/races/"> Back to race list</a>
+    {% else %}
+      <p>Error: <em>Users not available</em></p>
+    {% endif %}
+  </form>
+{% endblock  %}

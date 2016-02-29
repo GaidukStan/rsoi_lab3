@@ -1,0 +1,64 @@
+{% extends "page.html" %}
+
+{% macro here() -%}
+  /races/?per_page={{ per_page }}&page={{ page }}
+{%- endmacro %}
+
+{% block title %}races - {{ super() }}{% endblock %}
+
+{% block body %}
+  <h1>List of available RACES to participate in 2016</h1>
+    {% if user_name is none %}
+      <a href="/sign_in?redirect_to={{ here() | urlencode }}">Sign in!</a>
+    {% else %}
+      <a href="/me"> Your personal page, {{ user_name }}</a>
+      <br>
+    {% endif%}
+    {% if page_races is not none %}
+      <br>
+      <table>
+        <tbody>
+          <th>Name</th>
+          <th>Country</th>
+          <th>Distance</th>
+          <th>Laps</th>
+          {% if user_name is not none %}
+            <th>Participate race</th>
+          {% endif %}
+          {% for race in page_races %}
+            <tr>
+              <td style="text-align:left;border:1px solid">{{ race['name'] }}</td>
+              <td style="text-align:left;border:1px solid">{{ race['country'] }}</td>
+              <td style="text-align:center;border:1px solid">{{ race['distance'] }}</td>
+              <td style="text-align:center;border:1px solid">{{ race['laps'] }}</td>
+              {% if user_name is not none %}
+                <td style="text-align:center;border:1px solid">
+                  <form action="/entry" method="GET">
+                    <input type="hidden" name="race_id" value="{{race['id']}}"></input>
+                    <input type="submit" value="register"></input>
+                  </form>
+                </td>
+              {% endif %}
+            </tr>  
+          {% endfor %}
+        </tbody>
+      </table>
+      <span>
+        {% if page != 1 %}
+          <a href="?per_page={{ per_page }}&page=1">First page</a>
+        {% endif %}
+        {% if page > 1 %}
+          <a href="?per_page={{ per_page }}&page={{ page - 1}}">Previous page</a>
+        {% endif %}
+        {% if page < pages %}
+          <a href="?per_page={{ per_page }}&page={{ page + 1}}">Next page</a>
+        {% endif %}
+        {% if page != pages %}
+          <a href="?per_page={{ per_page }}&page={{ pages }}">Last page</a>
+        {% endif %}
+      </span>
+    {% else %}
+      <p>Error: <em>races not available</em></p>
+    {% endif %}
+
+{% endblock  %}

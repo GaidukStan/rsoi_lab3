@@ -1,0 +1,37 @@
+{% extends "page.html" %}
+
+{% macro here() -%}
+  /races/?per_page={{ per_page }}&page={{ page }}
+{%- endmacro %}
+
+{% block title %}Registrated races - {{ super() }}{% endblock %}
+
+{% block body %}
+  <h1>Races you participate:</h1>
+  <form method="POST">
+    {% if user_name is not none %}
+      <a href="/me">{{ user_name }}</a>
+    {% endif%}
+    {% if entrylist is not none %}
+      <table>
+        <tbody>
+          <th>Race name</th>
+          <th>Country</th>
+          <th>Distance</th>
+          <th>Class joined</th>
+          {% for entry in entrylist %}
+            <tr>
+              <td style="text-align:right;border:1px solid">{{ entry['name'] }}</td>
+              <td style="text-align:right;border:1px solid">{{ entry['country'] }}</td>
+              <td style="text-align:right;border:1px solid">{{ entry['distance'] }}</td>
+			  <td style="text-align:right;border:1px solid">{{ entry['laps'] }}</td>
+              <td style="text-align:right;border:1px solid">{{ entry['rclass'] }}</td>
+            </tr>  
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>Error: <em>Entrylist is not available</em></p>
+    {% endif %}
+  </form>
+{% endblock  %}

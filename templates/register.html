@@ -1,0 +1,49 @@
+{% extends "page.html" %}
+
+{% block title %}Register - {{ super() }}{% endblock %}
+
+{% block body %}
+  <h1>Register</h1>
+  <form method="POST">
+    <table>
+      <tbody>
+        <tr>
+          <td style="text-align:right">Username:</td>
+          <td>
+            <input name="login" pattern="^.{1,}$"></input>
+          </td>
+        </tr>  
+        <tr>
+          <td style="text-align:right">Password:</td>
+          <td>
+            <input name="password" type="password" pattern="^.{4,}$"></input>
+          </td>
+        </tr>  
+        <tr>
+          <td style="text-align:right">Name:</td>
+          <td>
+            <input name="name"></input>
+          </td>
+        </tr>  
+        <tr>
+          <td style="text-align:right">Country:</td>
+          <td>
+            <input name="country" type="country"></input>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align:right">eMail:</td>
+          <td>
+            <input name="email" type="email"></input>
+          </td>
+        </tr>  
+        <tr>
+          <td></td>
+          <td style="text-align:right">
+            <input type="submit" value="Register!"></input>
+          </td>
+        </tr>  
+      </tbody>
+    </table>
+  </form>
+{% endblock  %}

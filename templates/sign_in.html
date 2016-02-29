@@ -1,0 +1,31 @@
+{% extends "page.html" %}
+
+{% block title %}Sign in - {{ super() }}{% endblock %}
+
+{% block body %}
+  <h1>Sign in</h1>
+  <form method="POST">
+    <table>
+      <tbody>
+        <tr>
+          <td style="text-align:right">Username:</td>
+          <td>
+            <input name="login" pattern="^.{1,}$"></input>
+          </td>
+        </tr>  
+        <tr>
+          <td style="text-align:right">Password:</td>
+          <td>
+            <input name="password" type="password" pattern="^.{4,}$"></input>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td style="text-align:right">
+            <input type="submit" value="Sign in!"></input>
+          </td>
+        </tr>  
+      </tbody>
+    </table>
+  </form>
+{% endblock  %}
